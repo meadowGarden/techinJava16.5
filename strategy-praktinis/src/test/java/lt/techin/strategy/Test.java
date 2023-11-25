@@ -8,11 +8,11 @@ public class Test extends BaseWarehouseTests{
 
     @Override
     FilteringStrategy getManufacturerFilteringStrategy(String manufacturer) {
-        return null;
+        return new ManufactureFilteringStrategy(manufacturer);
     }
 
     @Override
     FilteringStrategy getMaxPriceFilteringStrategy(double maxPrice) {
-        return null;
+        return new MaxPriceFilteringStrategy(maxPrice);
     }
 }

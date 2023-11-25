@@ -4,24 +4,42 @@ import java.util.List;
 
 public class WarehouseImpl implements Warehouse {
 
-    private List<Product> products;
+    List<Product> shopStock;
 
     public WarehouseImpl() {
-        this.products = new ArrayList<>();
+        this.shopStock = new ArrayList<>();
     }
 
     @Override
     public void addProducts(List<Product> products) {
-       this.products = products;
+        shopStock.addAll(products);
     }
 
     @Override
     public int getNumberOfProducts() {
-        return products.size();
+        return shopStock.size();
     }
 
     @Override
     public List<Product> executeFilteringStrategy(FilteringStrategy strategy) {
-        return null;
+        List<Product> strategyList = new ArrayList<>();
+
+        for (Product product : shopStock) {
+            if (strategy.filter(product)) {
+                strategyList.add(product);
+            }
+        }
+
+        //shopStock.forEach(p -> strategy.filter(p));
+
+        return strategyList;
     }
+
+    public void printFilteredProductList(List<Product> list) {
+
+        list.forEach(System.out::println);
+
+    }
+
+
 }
